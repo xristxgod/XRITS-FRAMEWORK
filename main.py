@@ -1,6 +1,6 @@
 import os
 
-from snail import Snail
+from snail import Snail, middlewares
 from urls import urlpatterns
 
 
@@ -13,7 +13,8 @@ settings = {
 def main():
     snail = Snail(
         urls=urlpatterns,
-        settings=settings
+        settings=settings,
+        middlewares=middlewares
     )
 
 

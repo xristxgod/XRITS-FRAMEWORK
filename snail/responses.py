@@ -11,7 +11,7 @@ class Response:
         self.body = b''
         self._set_base_headers()
         if headers is not None:
-            self._update_headers(headers)
+            self.update_headers(headers)
         self._set_body(body)
         self.request = request
         self.extra = {}
@@ -27,9 +27,9 @@ class Response:
 
     def _set_body(self, raw_body: str) -> Optional:
         self.body = raw_body.encode("utf-8")
-        self._update_headers({"Content-Length": str(len(self.body))})
+        self.update_headers({"Content-Length": str(len(self.body))})
 
-    def _update_headers(self, headers: Dict) -> Optional:
+    def update_headers(self, headers: Dict) -> Optional:
         self.headers.update(headers)
 
 

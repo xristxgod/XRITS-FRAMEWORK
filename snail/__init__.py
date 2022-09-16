@@ -4,6 +4,7 @@ from .urls import Url
 from .requests import Request
 from .responses import Response
 from .templates_engine import build_template
+from .middlewares import middlewares
 
 
 __all__ = [
@@ -12,5 +13,6 @@ __all__ = [
     "Url",
     "Request",
     "Response",
-    "build_template"
+    "build_template",
+    "middlewares"
 ]

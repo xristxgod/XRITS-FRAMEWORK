@@ -7,6 +7,7 @@ class Request:
     def __init__(self, environ: Dict, settings: Dict):
         self._build_get_prams_dict(environ["QUERY_STRING"])
         self._build_post_params_dict(environ["wsgi.input"].read())
+        self.environ = environ
         self.settings = settings
         self.extra = {}
 
