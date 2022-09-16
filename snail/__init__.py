@@ -3,6 +3,7 @@ from .views import BaseView
 from .urls import Url
 from .requests import Request
 from .responses import Response
+from .templates_engine import build_template
 
 
 __all__ = [
@@ -10,5 +11,6 @@ __all__ = [
     "BaseView",
     "Url",
     "Request",
-    "Response"
+    "Response",
+    "build_template"
 ]
