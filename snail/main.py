@@ -11,8 +11,8 @@ from .utils import Utils
 
 class SnailRequestToResponse:
     @staticmethod
-    def get_request(environ: Dict) -> Request:
-        return Request(environ)
+    def get_request(environ: Dict, settings: Dict) -> Request:
+        return Request(environ, settings=settings)
 
     @staticmethod
     def get_response(environ: Dict, view: BaseView, request: Request) -> Response:
@@ -25,15 +25,16 @@ class SnailRequestToResponse:
 class Snail:
 
     __slots__ = (
-        "urls",
+        "urls", "settings"
     )
 
-    def __init__(self, urls: List[Url]):
+    def __init__(self, urls: List[Url], settings: Dict):
         self.urls = urls
+        self.settings = settings
 
     def __call__(self, environ: Dict, start_response: Type[Callable]):
         view = self._get_view(environ)
-        request = SnailRequestToResponse.get_request(environ)
+        request = SnailRequestToResponse.get_request(environ, self.settings)
         response = SnailRequestToResponse.get_response(environ, view, request)
         start_response(str(response.status_code), response.headers.items())
         return iter([response.body])

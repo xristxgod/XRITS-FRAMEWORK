@@ -14,8 +14,8 @@ class Response:
 
     def _set_base_headers(self) -> Optional:
         self.headers = {
-            {"Content-Type": "text/plain; charset=utf-8"},
-            {"Content-Length": 0}
+            "Content-Type": "text/plain; charset=utf-8",
+            "Content-Length": 0
         }
 
     def _set_body(self, raw_body: str) -> Optional:
