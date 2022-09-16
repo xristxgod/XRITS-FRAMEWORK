@@ -1,15 +1,14 @@
-from snail import BaseView, Request
+from snail import BaseView, Request, Response
 
 
 class HomepageView(BaseView):
 
-    def get(self, request, *args, **kwargs):
-        return "Hello world"
+    def get(self, request, *args, **kwargs) -> Response:
+        return Response(body="Hello world")
 
 
 class EpicMathView(BaseView):
 
-    def get(self, request: Request, *args, **kwargs):
+    def get(self, request: Request, *args, **kwargs) -> Response:
         first = request.GET('first')
-        if not first or not first[0].isnumeric():
-            return f"fsadfas"
+        return Response(body=f"{first}")

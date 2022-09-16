@@ -4,6 +4,7 @@ from typing import Type, List, Dict, Callable
 from .urls import Url
 from .views import BaseView
 from .requests import Request
+from .responses import Response
 from .exceptions import NotFound, NotAllowed
 from .utils import Utils
 
@@ -14,7 +15,7 @@ class SnailRequestToResponse:
         return Request(environ)
 
     @staticmethod
-    def get_response(environ: Dict, view: BaseView, request: Request):
+    def get_response(environ: Dict, view: BaseView, request: Request) -> Response:
         method: str = environ["REQUEST_METHOD"].lower()
         if not hasattr(view, method):
             raise NotAllowed
@@ -30,17 +31,12 @@ class Snail:
     def __init__(self, urls: List[Url]):
         self.urls = urls
 
-    def __call__(self, environ: Dict, start_response: Callable):
+    def __call__(self, environ: Dict, start_response: Type[Callable]):
         view = self._get_view(environ)
         request = SnailRequestToResponse.get_request(environ)
-        raw_response = SnailRequestToResponse.get_response(environ, view, request)
-        response = raw_response.encode("utf-8")
-        start_response(
-            "200 OK",
-            {"Content-Type": "text/plain; charset=utf-8"},
-            {"Content-Length": str(len(response))}
-        )
-        return iter([response])
+        response = SnailRequestToResponse.get_response(environ, view, request)
+        start_response(str(response.status_code), response.headers.items())
+        return iter([response.body])
 
     def _find_view(self, raw_url: str) -> Type[BaseView]:
         url = Utils.prepare_url(raw_url)

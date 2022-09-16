@@ -1,13 +1,13 @@
 from .requests import Request
-from .response import *
+from .responses import Response
 
 
 class BaseView:
 
-    def get(self, request: Request, *args, **kwargs):
+    def get(self, request: Request, *args, **kwargs) -> Response:
         pass
 
-    def post(self, request: Request, *args, **kwargs):
+    def post(self, request: Request, *args, **kwargs) -> Response:
         pass
 
 
