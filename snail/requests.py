@@ -8,6 +8,10 @@ class Request:
         self._build_get_prams_dict(environ["QUERY_STRING"])
         self._build_post_params_dict(environ["wsgi.input"].read())
         self.settings = settings
+        self.extra = {}
+
+    def __getattr__(self, item):
+        return self.extra.get(item)
 
     def _build_get_prams_dict(self, raw_params: str) -> Optional:
         self.GET = parse_qs(raw_params)
