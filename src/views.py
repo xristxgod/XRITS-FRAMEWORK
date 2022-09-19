@@ -8,3 +8,8 @@ class BaseView:
 
     def post(self, request: Request, *args, **kwargs) -> Response:
         raise NotImplementedError
+
+
+__all__ = [
+    "BaseView"
+]

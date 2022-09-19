@@ -8,3 +8,8 @@ from .views import BaseView
 class Url:
     url: str
     view: Type[BaseView]
+
+
+__all__ = [
+    "Url"
+]
