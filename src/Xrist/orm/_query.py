@@ -107,7 +107,8 @@ class Query:
 
     def _lines(self) -> Generator:
         for key, value in self._data.items():
-            yield value.definition()
+            if value:
+                yield value.definition()
 
     def __str__(self):
         return "".join(self._lines())

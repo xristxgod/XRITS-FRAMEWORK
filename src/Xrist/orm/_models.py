@@ -1,6 +1,10 @@
 from typing import Tuple, Dict
 from collections import OrderedDict
 
+from ._manager import Manager
+
+DEFAULT_DATABASE_PATH = 'mydb.db'
+
 
 class Field:
     pass
@@ -24,8 +28,14 @@ class ModelMeta(type):
         c = super(ModelMeta, ncs).__new__(ncs, class_name, parents, attributes)
         setattr(c, "_model_name", attributes["__qualname__"].lower())
         setattr(c, "_original_fields", fields)
+        setattr(c, "objects", Manager(c, DEFAULT_DATABASE_PATH))
         return c
 
 
 class Model(metaclass=ModelMeta):
     pass
+
+
+__all__ = [
+    "Model"
+]

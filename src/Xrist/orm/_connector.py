@@ -18,4 +18,7 @@ class DBConnector:
         cursor.execute(query)
         return cursor.fetchall()
 
-    
+
+__all__ = [
+    "DBConnector"
+]
