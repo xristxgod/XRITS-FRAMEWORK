@@ -6,7 +6,7 @@ from .request import Request
 from .response import Response
 from .views import BaseView
 from .exceptions import NotFound, NotAllowed
-from .middlewares import BaseMiddleware, DEFAULT_MIDDLEWARE
+from src.Xrist.middlewares import BaseMiddleware, DEFAULT_MIDDLEWARE
 
 
 def __prepare_url(url: str):

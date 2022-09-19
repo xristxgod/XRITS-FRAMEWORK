@@ -1,7 +1,7 @@
 from typing import Optional
 
-from ..request import Request
-from ..response import Response
+from src.Xrist.request import Request
+from src import Response
 
 
 class BaseMiddleware:
