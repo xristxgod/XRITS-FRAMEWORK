@@ -1,16 +1,9 @@
 import uuid
-from urllib.parse import parse_qs
+import urllib.parse
 
-from .requests import Request
-from .responses import Response
-
-
-class BaseMiddleware:
-    def to_request(self, request: Request):
-        return
-
-    def to_response(self, response: Response):
-        return
+from ..request import Request
+from ..response import Response
+from .base import BaseMiddleware
 
 
 class Session(BaseMiddleware):
@@ -18,7 +11,7 @@ class Session(BaseMiddleware):
         cookie = request.environ.get("HTTP_COOKIE", None)
         if not cookie:
             return
-        session_id = parse_qs(cookie)["session_id"][0]
+        session_id = urllib.parse.parse_qs(cookie)["session_id"][0]
         request.extra['session_id'] = session_id
 
     def to_response(self, response: Response):
@@ -26,6 +19,6 @@ class Session(BaseMiddleware):
             response.update_headers({"Set-Cookie": f"session_id={uuid.uuid4()}"})
 
 
-middlewares = [
-    Session,
+__all__ = [
+    "Session"
 ]

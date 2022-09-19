@@ -8,4 +8,3 @@ from .views import BaseView
 class Url:
     url: str
     view: Type[BaseView]
-

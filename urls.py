@@ -1,10 +1,22 @@
-from snail import Url
+# from snail import Url
+#
+# from views import HomepageView
+# from views import EpicMathView
+#
+#
+# urlpatterns = [
+#     Url("^$", HomepageView),
+#     Url("^/math$", HomepageView),
+# ]
 
-from views import HomepageView
-from views import EpicMathView
+class Test:
+    def test(self):
+        return "ga"
 
 
-urlpatterns = [
-    Url("^$", HomepageView),
-    Url("^/math$", HomepageView),
-]
+t = Test
+
+
+
+d = getattr(t, "test")
+print(d(t))

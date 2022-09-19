@@ -1,16 +1,10 @@
-from .requests import Request
-from .responses import Response
+from .request import Request
+from .response import Response
 
 
 class BaseView:
-
     def get(self, request: Request, *args, **kwargs) -> Response:
-        pass
+        raise NotImplementedError
 
     def post(self, request: Request, *args, **kwargs) -> Response:
-        pass
-
-
-__all__ = [
-    "BaseView"
-]
+        raise NotImplementedError
