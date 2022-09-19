@@ -53,8 +53,13 @@ class Application:
     __MIDDLEWARE_CONTROLLER = _MiddlewareController
 
     __slots__ = (
-        "urls", "settings", "middlewares"
+        "instance", "urls", "settings", "middlewares"
     )
+
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(cls, "instance"):
+            cls.instance = super(Application, cls).__new__(cls, *args, **kwargs)
+        return cls.instance
 
     def __init__(self, urls: List[Url], *, settings: Dict, middlewares: List[Type[BaseMiddleware]] = DEFAULT_MIDDLEWARE):
         self.urls = urls
